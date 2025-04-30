@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 import DrawerIcon from "@/components/navigator/DrawerIcon";
 import tailwindColors from "@/utils/tailwindColors";
 import { useColorScheme } from "nativewind";
-
+import { HEADER_ICON_SIZE } from "@/constants/constants";
 const ProfileLayout = () => {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
@@ -25,13 +25,17 @@ const ProfileLayout = () => {
         headerTitleStyle: {
           color: foregroundTheme,
         },
+        headerTintColor: foregroundTheme,
+        // detachInactiveScreens: true,
       }}
     >
       <Stack.Screen
         options={{
           headerShown: true,
           headerTitle: "Profile",
-          headerLeft: () => <DrawerIcon color={foregroundTheme} size={24} />,
+          headerLeft: () => (
+            <DrawerIcon color={foregroundTheme} size={HEADER_ICON_SIZE} />
+          ),
         }}
         name="index"
       />

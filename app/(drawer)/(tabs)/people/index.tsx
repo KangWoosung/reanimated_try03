@@ -66,16 +66,16 @@ const PeopleIndex = () => {
   // Restore scroll position
   useEffect(() => {
     // 저장된 스크롤 위치가 있을 때만 복원
-    if (scrollPosition > 0 && scrollRef.current) {
-      console.log("scrollPosition", scrollPosition);
-      // setTimeout을 사용하여 렌더링 후 실행
-      setTimeout(() => {
-        scrollRef.current?.scrollToOffset({
-          offset: scrollPosition,
-          animated: true,
-        });
-      }, 100);
-    }
+    // if (scrollPosition > 0 && scrollRef.current) {
+    //   console.log("scrollPosition", scrollPosition);
+    //   // setTimeout을 사용하여 렌더링 후 실행
+    //   setTimeout(() => {
+    //     scrollRef.current?.scrollToOffset({
+    //       offset: scrollPosition,
+    //       animated: true,
+    //     });
+    //   }, 100);
+    // }
 
     return () => {
       if (scrollPosition !== scrollOffset.value) {

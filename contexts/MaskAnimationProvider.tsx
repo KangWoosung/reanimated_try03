@@ -38,22 +38,22 @@ import {
   Image,
   Canvas,
   Circle,
-  ImageShader,
-  mix,
   Fill,
   Mask,
   Group,
   Rect,
 } from "@shopify/react-native-skia";
-// import { StatusBar } from "expo-status-bar";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { useColorScheme as useNativewindColorScheme } from "nativewind";
 import { useMaskAnimationStore } from "@/contexts/maskAnimationZustand";
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { useColorScheme } from "nativewind";
 
-// import { SystemBars } from "react-native-bars";
+import { SystemBars } from "react-native-bars";
+import tailwindColors from "@/utils/tailwindColors";
 // import { SystemBars } from "react-native-edge-to-edge";
 
 export const { width: SCRN_WIDTH, height: SCRN_HEIGHT } =
@@ -73,7 +73,16 @@ type ColorSchemeProviderProps = {
 };
 
 const MaskAnimationProvider = ({ children }: ColorSchemeProviderProps) => {
-  const { colorScheme, setColorScheme } = useNativewindColorScheme();
+  const { colorScheme } = useColorScheme();
+  const { setColorScheme } = useNativewindColorScheme();
+  const [initStatusBarBGColor, setInitStatusBarBGColor] = useState<string>("");
+
+  const isDark = colorScheme === "dark";
+
+  const backgroundTheme =
+    tailwindColors.background[isDark ? "secondaryDark" : "secondary"];
+  const foregroundTheme =
+    tailwindColors.foreground[isDark ? "secondaryDark" : "secondary"];
 
   // Pixel Density for Snapshot Image Scaling
   const pd = PixelRatio.get();
@@ -87,6 +96,7 @@ const MaskAnimationProvider = ({ children }: ColorSchemeProviderProps) => {
   // Derived Values
   const derivedCircleX = useDerivedValue(() => circleCoordX?.value ?? 0);
   const derivedCircleY = useDerivedValue(() => circleCoordY?.value ?? 0);
+  const derivedCircleRadius = useDerivedValue(() => circleRadius?.value ?? 0);
 
   // create ref
   const ref = useRef<View>(null);
@@ -127,11 +137,21 @@ const MaskAnimationProvider = ({ children }: ColorSchemeProviderProps) => {
   }, []);
 
   return (
-    // <SafeAreaProvider>
-    //   <SafeAreaView className="flex-1 bg-background dark:bg-background-dark">
     <>
-      {/* <SystemBars style={colorScheme === "dark" ? "light" : "dark"} /> */}
-      {/* <StatusBar style={colorScheme === "light" ? "dark" : "light"} /> */}
+      {/* <View className=" bg-blue-300 dark:bg-blue-600" style={{}}></View> */}
+      <SafeAreaView>
+        {/* <SystemBars style={colorScheme === "dark" ? "light" : "dark"} /> */}
+        {/* <ExpoStatusBar
+        translucent
+        style={colorScheme === "light" ? "dark" : "light"}
+      /> */}
+        <StatusBar
+          animated={false}
+          backgroundColor={backgroundTheme}
+          // translucent={true}
+          barStyle={colorScheme === "dark" ? "light-content" : "dark-content"}
+        />
+      </SafeAreaView>
 
       {/* <SystemBars
         animated={true}
@@ -195,7 +215,7 @@ const MaskAnimationProvider = ({ children }: ColorSchemeProviderProps) => {
                 <Circle
                   cx={derivedCircleX}
                   cy={derivedCircleY}
-                  r={circleRadius}
+                  r={derivedCircleRadius}
                   color="black"
                 />
               </Group>
@@ -213,9 +233,8 @@ const MaskAnimationProvider = ({ children }: ColorSchemeProviderProps) => {
         </Canvas>
       )}
       {/* </View> */}
-      {/* </SafeAreaView>
-    </SafeAreaProvider> */}
     </>
+    // </SafeAreaProvider>
   );
 };
 

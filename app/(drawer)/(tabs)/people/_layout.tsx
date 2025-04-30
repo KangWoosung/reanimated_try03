@@ -10,7 +10,7 @@ import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import tailwindColors from "@/utils/tailwindColors";
 import { useColorScheme } from "nativewind";
-
+import { HEADER_ICON_SIZE } from "@/constants/constants";
 const PeopleLayout = () => {
   const params = useGlobalSearchParams();
   const { colorScheme } = useColorScheme();
@@ -49,7 +49,9 @@ const PeopleLayout = () => {
         options={{
           headerShown: true,
           headerTitle: "People",
-          headerLeft: () => <DrawerIcon color={foregroundTheme} size={24} />,
+          headerLeft: () => (
+            <DrawerIcon color={foregroundTheme} size={HEADER_ICON_SIZE} />
+          ),
         }}
       />
       <Stack.Screen

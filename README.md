@@ -8,7 +8,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 - [x] Drawer Animation
 - [x] List Animation
 - [x] Shared Element Animation
-- [ ] Masking Skia Animation
+- [x] Masking Skia Animation
 
 ## Demo darkMode1.gif
 
@@ -19,6 +19,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 ![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/main/assets/demos/ezgif-745126c80772e1.gif)
 
 ![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/master/assets/demos/darkMode1.gif)
+
+![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/master/assets/demos/sezgif-888817949aeb8c.gif)
 
 ## Get started
 
@@ -78,4 +80,4 @@ Join our community of developers creating universal apps.
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 
-# reanimated_try02
+# reanimated_try03

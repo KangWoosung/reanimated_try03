@@ -1,28 +1,11 @@
-/*
-
-
-
-
-*/
-
 import { View, Text } from "react-native";
-import React, { useEffect } from "react";
-import { router, Stack, useGlobalSearchParams } from "expo-router";
+import React from "react";
+import { Stack } from "expo-router";
 import DrawerIcon from "@/components/navigator/DrawerIcon";
-import { Ionicons } from "@expo/vector-icons";
 import tailwindColors from "@/utils/tailwindColors";
 import { useColorScheme } from "nativewind";
-const IndexLayout = () => {
-  const params = useGlobalSearchParams();
-
-  // Clear the Stack
-  // useEffect(() => {
-  //   const clearStack = () => {
-  //     router.dismissAll();
-  //   };
-  //   return clearStack();
-  // }, []);
-
+import { HEADER_ICON_SIZE } from "@/constants/constants";
+const ProfileLayout = () => {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
 
@@ -42,24 +25,23 @@ const IndexLayout = () => {
         headerTitleStyle: {
           color: foregroundTheme,
         },
+        headerTintColor: foregroundTheme,
+        // detachInactiveScreens: true,
       }}
     >
       <Stack.Screen
-        name="index"
         options={{
           headerShown: true,
-          headerTitle: "Index",
-          headerLeft: () => <DrawerIcon color={foregroundTheme} size={24} />,
-          headerStyle: {
-            backgroundColor: backgroundTheme,
-          },
-          headerTitleStyle: {
-            color: foregroundTheme,
-          },
+          headerTitle: "Home",
+          headerLeft: () => (
+            <DrawerIcon color={foregroundTheme} size={HEADER_ICON_SIZE} />
+          ),
         }}
+        name="index"
       />
+      <Stack.Screen name="[id]" />
     </Stack>
   );
 };
 
-export default IndexLayout;
+export default ProfileLayout;

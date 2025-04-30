@@ -1,11 +1,25 @@
 ## 2025-03-17 06:14:12
 ## Init Project
 npx create-expo-app@latest . --template default
+##npx create-expo-app@latest . --template default@sdk-53
+
+
+## npx expo install react-native-reanimated@next react-native-worklets react-native-safe-area-context
+
+## Gesture Handler
+npx expo install react-native-gesture-handler
+
+## 2025-04-16 00:46:47
+npx expo install @react-navigation/drawer
+
+## 2025-03-21 11:12:52
+npx expo install react-native-svg
+
 
 ## Tailwind CSS & Reanimated
 ## Mind the newest versions command string in officials at:
 ## https://www.nativewind.dev/getting-started/installation
-npx expo install nativewind tailwindcss@^3.4.17 react-native-reanimated@3.16.2 react-native-safe-area-context
+npx expo install nativewind tailwindcss@^3.4.17
 
 ## config Tailwind
 npx tailwindcss init
@@ -33,9 +47,6 @@ npm install class-varience-authority
 echo "Edit Reanimated config files as instructed and press Enter to continue..."
 read
 
-## Gesture Handler
-npx expo install react-native-gesture-handler
-
 ## Gorhom Bottom Sheet
 npx expo install @gorhom/bottom-sheet@^5
 
@@ -51,15 +62,15 @@ npx expo install @tanstack/react-query
 ## MMKV
 npx expo install react-native-mmkv
 
+## 2025-04-28 10:19:39
+npx expo install @react-native-async-storage/async-storage
+
 ## RNR Primitives
 npx expo install @rn-primitives/slot
 npx expo install @rn-primitives/types
 npx expo install @rn-primitives/utils
 npx expo install @rn-primitives/portal
 npx expo install @rn-primitives/hooks
-
-## 2025-03-21 11:12:52
-npx expo install react-native-svg
 
 ## 2025-03-21 16:52:48
 npx expo install react-native-redash
@@ -70,14 +81,14 @@ npx expo install expo-font
 ## 2025-04-06 17:33:55
 npx expo install expo-status-bar
 
+## 2025-04-30 16:33:52
+npx expo install react-native-bars
+
 ## 2025-04-14 22:34:10
 npx expo install @clerk/clerk-expo
 
 ## 2025-04-14 22:39:52
 npx expo install expo-secure-store
-
-## 2025-04-16 00:46:47
-npx expo install @react-navigation/drawer
 
 ## 2025-04-16 08:25:43
 npx expo install expo-image
@@ -94,11 +105,11 @@ npx expo install @shopify/restyle
 ## 2025-04-28 10:17:40
 npx expo install expo-zustand-persist
 
-## 2025-04-28 10:19:39
-npx expo install @react-native-async-storage/async-storage
-
 ## 2025-04-28 11:58:08
-npx expo install react-native-edge-to-edge
+## npx expo install react-native-edge-to-edge
+
+## 2025-04-29 16:41:14
+npx expo install react-native-theme-switch-animation
 
 
 ## Wait for user input

@@ -17,6 +17,7 @@ import { useColorScheme } from "nativewind";
 import { THEME_TOGGLER_BUTTON_SIZE } from "@/constants/constants";
 import { CurtainMaskTriggerButton } from "./CurtainMaskTriggerButton";
 import { CircleMaskTriggerButton } from "./CircleMaskTriggerButton";
+import ThemeSwitchAnimationButton from "./ThemeSwitchAnimationButton";
 const getRandomAvatarUri = () => {
   const randomNum = Math.floor(Math.random() * (99 - 10 + 1)) + 10;
   return `https://randomuser.me/api/portraits/men/${randomNum}.jpg`;

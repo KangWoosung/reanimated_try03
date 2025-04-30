@@ -10,7 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "nativewind";
 import "./styles/global.css";
 import { ReanimatedLogLevel } from "react-native-reanimated";
 import { configureReanimatedLogger } from "react-native-reanimated";
@@ -25,6 +25,8 @@ import { NativewindThemeProvider } from "@/contexts/NativewindThemeProvider";
 import { SafeAreaView } from "react-native";
 import OnBoardingIndex from "./onboarding";
 import MaskAnimationProvider from "@/contexts/MaskAnimationProvider";
+import DrawerIcon from "@/components/navigator/DrawerIcon";
+import tailwindColors from "@/utils/tailwindColors";
 
 // 2025-03-29 17:12:23
 // disabled strict mode for reanimated
@@ -79,11 +81,17 @@ export default function RootLayout() {
       setOnBoardingFlag(false);
     }
   }, [onBoardingActive]);
-
   ////////////////////////////////////////////////
   // Theme State
+  const { colorScheme } = useColorScheme();
   const { nativewindColorScheme, nativeWindSetTheme } = useThemeProvider(); // Provider 가 제공하는 테마 상태
-  const { colorScheme, setColorScheme } = useNativewindColorScheme();
+
+  const isDark = colorScheme === "dark";
+
+  const backgroundTheme =
+    tailwindColors.background[isDark ? "secondaryDark" : "secondary"];
+  const foregroundTheme =
+    tailwindColors.foreground[isDark ? "secondaryDark" : "secondary"];
 
   useEffect(() => {
     nativeWindSetTheme(nativewindColorScheme as "light" | "dark");
@@ -94,26 +102,23 @@ export default function RootLayout() {
   if (!onBoardingFlag) {
     return (
       <GestureHandlerRootView>
-        <MaskAnimationProvider>
-          <NativewindThemeProvider>
-            {/* <StatusBar
-                // hidden={isDrawerOpen}
-                // animated={false}
-                style={colorScheme === "light" ? "dark" : "light"}
-              /> */}
-            <Stack initialRouteName="(drawer)">
-              <Stack.Screen
-                name="(drawer)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen name="settings" />
-              <Stack.Screen name="logout" />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </NativewindThemeProvider>
-        </MaskAnimationProvider>
+        <SafeAreaProvider>
+          <MaskAnimationProvider>
+            <NativewindThemeProvider>
+              <Stack initialRouteName="(drawer)">
+                <Stack.Screen
+                  name="(drawer)"
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen name="settings" />
+                <Stack.Screen name="logout" />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </NativewindThemeProvider>
+          </MaskAnimationProvider>
+        </SafeAreaProvider>
       </GestureHandlerRootView>
     );
   }

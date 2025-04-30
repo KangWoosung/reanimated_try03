@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StatusBar } from "react-native";
 import React from "react";
 import { useColorScheme } from "nativewind";
 import { useThemeProvider } from "@/contexts/NativewindThemeProvider";
@@ -14,6 +14,11 @@ import {
   THEME_TOGGLER_BUTTON_SIZE,
 } from "@/constants/constants";
 import { Feather } from "@expo/vector-icons";
+import { calculateMaxRadius } from "@/utils/calculateMaxRadius";
+import {
+  StatusBar as ExpoStatusBar,
+  setStatusBarHidden,
+} from "expo-status-bar";
 
 export const CircleMaskTriggerButton = () => {
   const { colorScheme } = useColorScheme();
@@ -31,15 +36,12 @@ export const CircleMaskTriggerButton = () => {
   const isDark = colorScheme === "dark";
   const foregroundTheme =
     tailwindColors.foreground[isDark ? "dark" : "DEFAULT"];
+  const backgroundTheme =
+    tailwindColors.background[isDark ? "secondaryDark" : "secondary"];
 
   const tap = Gesture.Tap()
     .runOnJS(true)
     .onStart(async (e) => {
-      console.log("circleRadius", circleRadius);
-      // Store event coordinates
-      console.log("x", e.x);
-      console.log("y", e.y);
-
       if (circleCoordX) {
         circleCoordX.value = e.absoluteX;
       }
@@ -49,26 +51,30 @@ export const CircleMaskTriggerButton = () => {
 
       if (!active) {
         setActive(true);
-        // Wait for just 1 frame
-        await wait(16);
+        // setStatusBarHidden(true, "none");
+        await wait(18);
         const snapshot2 = await takeSnapshot(ref);
         if (snapshot2) {
           setCircleOverlay(snapshot2);
         }
-        // await wait(80);
-        nativeWindSetTheme(nativewindColorScheme === "dark" ? "light" : "dark");
-
-        console.log("circleRadius", circleRadius);
         if (circleRadius) {
-          circleRadius.value = withTiming(800, {
+          const maxRadius = calculateMaxRadius(e.absoluteX, e.absoluteY);
+          circleRadius.value = withTiming(maxRadius, {
             duration: MASK_ANIMATE_DURATION,
           });
         }
+        // Wait for just 1 frame
+        await wait(16);
+        nativeWindSetTheme(nativewindColorScheme === "dark" ? "light" : "dark");
+
         await wait(MASK_ANIMATE_DURATION);
+        // StatusBar.setBackgroundColor(backgroundTheme);
+
         setCircleOverlay(null);
         if (circleRadius) circleRadius.value = 0;
         if (circleCoordX) circleCoordX.value = 0;
         if (circleCoordY) circleCoordY.value = 0;
+        // setStatusBarHidden(false);
         setActive(false);
       }
     });
