@@ -20,7 +20,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/master/assets/demos/darkMode1.gif)
 
-![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/master/assets/demos/sezgif-888817949aeb8c.gif)
+![Demo](https://raw.githubusercontent.com/KangWoosung/reanimated_try03/master/assets/demos/ezgif-888817949aeb8c.gif)
 
 ## Get started
 
